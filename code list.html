@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Codes</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        table { margin: auto; width: 50%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid black; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <h2>List of Generated Product Codes</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Created At</th>
+        </tr>
+        <tbody id="codeTable"></tbody>
+    </table>
+
+    <script>
+        async function fetchCodes() {
+            const response = await fetch('http://localhost:3000/codes');
+            const data = await response.json();
+            let tableHTML = "";
+            data.data.forEach(code => {
+                tableHTML += `<tr><td>${code.id}</td><td>${code.code}</td><td>${code.createdAt}</td></tr>`;
+            });
+            document.getElementById("codeTable").innerHTML = tableHTML;
+        }
+
+        fetchCodes();
+    </script>
+
+</body>
+</html>
